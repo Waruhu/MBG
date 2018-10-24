@@ -1,0 +1,133 @@
+#list-library, #list-playlist, #list-kitab-suci, #list-ayat{
+	overflow-y: scroll;
+}
+#library,#list-library{
+	height:400px !important;
+}
+#playlist,#list-playlist{
+	height:250px !important;
+}
+#kitab-suci,#list-kitab-suci{
+	max-height: 200px !important;
+	bottom: 0;
+}
+#container{
+    height:960px !important;
+    background-color: burlywood;
+}
+#list-ayat{
+    height: 715px !important;
+    font-size: 30pt;
+    color:white;
+}
+#lirik-lagu{
+    height: 660px !important;
+    font-size: 48pt;
+}
+#list-lagu{
+    overflow-y: scroll;
+    height: 200px;
+}
+audio{
+    width: 100% !important;
+
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(5, 162, 199, 0.96)!important;
+    color: white;
+    height: 50px;
+    padding: 10px 5px 10px 5px;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .1rem 0.2rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+
+.list-group-item:hover{
+    background-color: gold;
+    color: red;
+}
+.list-group-item:active{
+    background-color: limegreen;
+}
+.list-group-item:visited{
+    background-color:limegreen;
+}
+
+.card-title {
+    margin-bottom: 0px !important;
+    padding-bottom: 0.5rem;
+    background-color: #078aea;
+    padding-top: 0.5em;
+    text-align: center;
+    color:white;
+    font-weight: bold;
+}
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;  
+    background-color: white;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background:blue;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background:blue;
+    cursor: pointer;
+}
+
+    progress {
+        width: 50%;
+        float: left;
+        margin-top:10px;
+      }
+      
+      progress[value] {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: white;
+        color: blue;
+        height: 10px;
+      }
+      
+      progress[value]::-webkit-progress-bar {
+        background-color: white;
+        border-radius: 2px;
+        border: 1px solid lighten(#acacac, 20%);
+        color: blue;
+      }
+      
+      progress::-webkit-progress-value {
+        background-color: blue;
+      }
+      

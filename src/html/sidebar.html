@@ -1,0 +1,50 @@
+<div class="card" id="library">
+    <h5 class="card-title">Album
+        <button class="btn btn-danger btn-sm float-right" style="margin-right:5px;" id="add-album" title="Tambah Album"
+            data-toggle="modal" data-target="#albumModal">
+            <span class="fa fa-list-ul"></span> </button>
+    </h5>
+    <ul class="list-group" id="list-library"></ul>
+</div>
+<br />
+<div class="card" id="playlist">
+    <h5 class="card-title">Playlist
+        <button class="btn btn-danger btn-sm float-right" style="margin-right:5px;" id="add-playlist" title="Tambah Playlist">
+            <span class="fa fa-list-ul"></span>
+    </h5>
+    <ul class="list-group" id="list-playlist"></ul>
+</div>
+<br />
+<div class="card" id="kitab-suci">
+    <h5 class="card-title">Kitab Suci</h5>
+    <ul class="list-group" id="list-kitab-suci">
+        <li class="list-group-item list-group-item-action" id="bibel">Bibel</li>
+        <li class="list-group-item list-group-item-action" id="alkitab">Alkitab</li>
+    </ul>
+</div>
+
+<div class="modal fade" id="albumModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Daftar Album</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" id="albumModalBody">
+                
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="../js/sidebar.js"></script>

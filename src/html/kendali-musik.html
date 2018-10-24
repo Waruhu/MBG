@@ -1,0 +1,34 @@
+<div class="col-2">
+    <button type="button" class="btn music-control" onclick="play()" id="btnPlay" title="Play"><span class="fa fa-play"></button>
+    <button type="button" class="btn music-control" onclick="pause()" id="btnPause" style="display:none" title="Pause"><span
+            class="fa fa-pause"></span></button>
+    <button type="button" class="btn music-control" onclick="stop()" id="btnStop" title="Stop"><span class="fa fa-stop"></span></button>
+    <button type="button" class="btn music-control" style="display:none"><span class="fa fa-angle-double-right"></span></button>
+    <button type="button" class="btn music-control" style="display:none"><span class="fa fa-angle-double-left"></span></button>
+</div>
+<div class="col-2">
+    <div class="volume">
+        <button class="btn btn-sm float-left music-control" style="margin-right: 5px;" id="volume-down" title="Kurangi Volume">
+            <span class="fa fa-volume-down"></span> </button>
+        <progress value="50" max="100" id="progressVolume"></progress>
+        <button class="btn btn-sm float-left music-control" style="margin-left: 5px;" id="volume-up" title="Tambah Volume">
+            <span class="fa fa-volume-up"></span> </button>
+    </div>
+</div>
+<div class="col-6">
+    <div class="slidecontainer">
+        <input type="range" min="0" max="100" value="0" class="slider music-control" id="progressMusik">
+    </div>
+    <small class="col-1" style="float: left; position: relative; left: 15px;" id="start-time"></small>
+    <small class="col-1" style="float: right; position: relative; right: 20px;" id="end-time"></small>
+</div>
+<div class="col-2">
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <div class="input-group-text"><span class="fa fa-search"></span></div>
+        </div>
+        <input type="text" class="form-control" placeholder="Cari...">
+    </div>
+</div>
+
+<script src="../js/musik-kendali.js"></script>

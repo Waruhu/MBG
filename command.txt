@@ -1,0 +1,1 @@
+/bin/bash -c "ulimit -s 65500; exec /usr/bin/node --stack-size=65500 /home/nakama/WORK/Electron/mbg/readExcel.js"

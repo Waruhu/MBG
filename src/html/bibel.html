@@ -1,0 +1,52 @@
+<div class="row">
+    <table class="table">
+    <tbody>
+      <tr>
+        <td>Kitab</td>
+        <td>
+          <select class="form-control form-control-sm" id="s_kitab">
+            <option></option>
+          </select>
+        </td>
+        <td>Ayat</td>
+        <td>
+          <select class="form-control form-control-sm" id="s_ayat">
+            <option></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Pasal</td>
+        <td>
+          <select class="form-control form-control-sm" id="s_pasal">
+            <option></option>
+          </select>
+        </td>
+        <td>Jumlah Ayat Tampil</td>
+        <td>
+          <select class="form-control form-control-sm" id="s_limit">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-primary btn-sm" id="submit"><span class="fa fa-check-circle"></span> Tampil</button></td>
+        <td><button type="button" class="btn btn-danger btn-sm" id="prevListAyat"><span class="fa fa-angle-double-left"></span> Ayat</button></td>
+        <td><button type="button" class="btn btn-danger btn-sm" id="nextListAyat">Ayat <span class="fa fa-angle-double-right"></span></button></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row" style="background-color:#0876ec!important;">
+  <div class="col-1" id="action-list-ayat">
+    <button type="button" class="btn btn-default btn-sm" id="plus-font-size" style="margin-bottom:5px;margin-top:5px; font-size:15pt;" title="Perbesar">A<sup><span class="fa fa-plus"></span></sup></button>
+    <button type="button" class="btn btn-default btn-sm" id="minus-font-size" style="margin-bottom:5px; font-size:15pt;" title="Perkecil">A<sup><span class="fa fa-minus"></span></sup></button>
+  </div>
+  <div class="col-11" id="list-ayat"> </div>
+</div>
+<script src="../js/bible.js"></script>
