@@ -1,0 +1,26 @@
+<link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<br />
+
+<div class="container">
+<input type='hidden' class='form-control' id='id_album'>
+
+<div class="input-group mb-3">
+    <input type="text" id="label_library" class="form-control" placeholder="Label library..." aria-label="Label library..."
+        aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-success" type="button" onclick="simpanLibrary()">Simpan</button>
+    </div>
+</div>
+</div>
+
+
+<script>
+const remote = require('electron').remote;
+const database = remote.require("./src/js/database.js");
+
+</script>
+
+
+<script src="../../renderer.js"></script>
+<script src="../js/database.js"></script>
+<script src="../js/sidebar.js"></script>

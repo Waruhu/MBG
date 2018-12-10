@@ -23,6 +23,7 @@
 #lirik-lagu{
     height: 660px !important;
     font-size: 48pt;
+    overflow-y: scroll;
 }
 #list-lagu{
     overflow-y: scroll;
@@ -57,8 +58,8 @@ audio{
     background-color: gold;
     color: red;
 }
-.list-group-item:active{
-    background-color: limegreen;
+.list-group-item.active{
+    background-color: gold !important;
 }
 .list-group-item:visited{
     background-color:limegreen;
@@ -73,7 +74,12 @@ audio{
     color:white;
     font-weight: bold;
 }
-
+.footer-card-btn{
+    width: 30px;
+    margin-bottom:5px;
+    margin-left:10px;
+    margin-top:10px;
+}
 .slidecontainer {
     width: 100%; /* Width of the outside container */
 }
@@ -130,4 +136,5 @@ audio{
       progress::-webkit-progress-value {
         background-color: blue;
       }
-      
+
+

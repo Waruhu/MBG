@@ -1,33 +1,14 @@
-<audio id="audiofile" ontimeupdate="initProgressBar()">
-    <source id="audioSource" src="/home/nakama/WORK/Electron/mbg/files/Satu-Satunya-Harapan.mp3" type="audio/mp3">
+<audio id="audiofile" type="audio/mp3" ontimeupdate="initProgressBar()">
 </audio><br>
 <script src="../js/musik.js"></script>
+<script src="../js/mbg.js"></script>
 
 <script>
     load_musik();
     var list_lagu = document.getElementById('list-lagu');
 
-    var audioSync = require('audio-sync-with-text');
     var app = require('electron').remote.app;
-    //init:
-    lib = new audioSync({
-        audioPlayer: 'audiofile', // the id of the audio tag
-        subtitlesContainer: 'lirik-lagu', // the id where subtitles should show
-        subtitlesFile: app.getAppPath() + '/files/Satu-Satunya-Harapan.vtt' // the path to the vtt file
-    });
    
-    list_lagu.onclick = function (e) {
-        e.preventDefault();
-
-        var elm = e.target;
-        var audio = document.getElementById('audiofile');
-
-        var source = document.getElementById('audioSource');
-        source.src = elm.getAttribute('path_lagu');
-
-        audio.load(); //call this to just preload the audio without playing
-        lib.subtitlesFile = elm.getAttribute('path_lirik');
-    };
 
     $('#plus-font-size').bind('click', function () {
         var size = parseInt($("#lirik-lagu").css('font-size'));
@@ -51,9 +32,17 @@
                 var html = '';
                 var app = require('electron').remote.app;
                 results.forEach(function (lagu) {
-                    html += "<li><a href='#' path_lagu='" + app.getAppPath() + '' + lagu.path_lagu + "' path_lirik='" + app.getAppPath() + '' + lagu.path_lirik + "' class='list-group-item list-group-item-action'>" + lagu.judul + "</a></li>";
+                    html += "<li path_lagu='" + app.getAppPath() + lagu.path_lagu + "' path_lirik='" + app.getAppPath() + lagu.path_lirik + "' class='list-group-item list-group-item-action row-music'>" + lagu.judul + "</li>";
                 });
                 $('#list-lagu').html(html);
+                $(".row-music").click(function () {                    
+                    $(this).siblings().removeClass("active");
+                    $(this).addClass("active");
+                    stop();
+                    $("#audiofile").attr("src",$(this).attr('path_lagu'))
+                    audiosync("audiofile","lirik-lagu",$(this).attr('path_lirik'))
+                    
+                });
             }
         });
     }

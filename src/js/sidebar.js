@@ -11,12 +11,44 @@ $("#bibel").click(function () {
     $("#content").html(content.toString());
 });
 
-$("#add-album").click(function () {
-    loadTableAlbum();
+
+$("#btn-add-library").click(function(){
+    const remote = require('electron').remote;
+    const BrowserWindow = remote.BrowserWindow;
+    const path = require('path');
+    const url = require('url');
+
+    let top = remote.getCurrentWindow();
+    let child = new BrowserWindow({
+        with:300,
+        height:100,
+        parent: top, 
+        modal: true, 
+        show: false,
+        title: "Formulir"
+    });
+    child.loadURL(url.format({
+		pathname: path.join(__dirname,'editor-library.html'),
+		protocol: 'file',
+		slashes: true
+	}));
+    child.once('ready-to-show', () => {
+        child.show()
+    });
+    child.webContents.openDevTools();
+
+    child.on('closed',()=>{
+        load_m_library();
+        loadTableAlbum();
+        child = null;
+	});
+	
+
 });
-$("#simpan_album").click(function(){
+
+function simpanLibrary(){
     event.preventDefault();
-    var nama = $("#nama_album").val();
+    var nama = $("#label_library").val();
     var sql = "insert into m_library(nama,status,kode) values('"+nama+"',1,'00')";
     database.query(sql, function (error, results, fields) {
         if (error) console.log(error);
@@ -25,63 +57,18 @@ $("#simpan_album").click(function(){
             loadTableAlbum();
         }
     });
-});
-function simpanAlbum(){
-    event.preventDefault();
-    var nama = $("#nama_album").val();
-    var sql = "insert into m_library(nama,status,kode) values('"+nama+"',1,'00')";
-    database.query(sql, function (error, results, fields) {
-        if (error) console.log(error);
-        else {
-            load_m_library();
-            loadTableAlbum();
-        }
-    });
-}
-function loadTableAlbum() {
-    var sql = 'select * from `m_library`';
-    database.query(sql, function (error, results, fields) {
-        if (error) console.log(error.code);
-        else {
-            var row = 1;
-            var form = "<div class='form-group mb-2'>"+
-                "   <input type='hidden' class='form-control' id='id_album'>"+
-                "</div>"+
-                "<div class='form-group mx-sm-3 mb-2'>"+
-                "   <label for='nama_album'>Nama Album</label>"+
-                "    <input type='text' class='form-control' id='nama_album'>"+
-                "</div>"+
-                "<button class='btn btn-primary' id='simpan_album' onclick='simpanAlbum()'>Simpan</button>";
-            var html = form + "<table class='table'>" +
-                "<thead class='thead-light'>" +
-                "<tr>" +
-                "<th scope='col'>#</th>" +
-                "<th scope='col' colspan=2>Nama Album</th>" +
-                "</tr>" +
-                "</thead>" +
-                "<tbody>";
-            results.forEach(function (library) {
-                html += "<tr>" +
-                    "<td>" + row++ + "</td>" +
-                    "<td>" + library.nama + "</td>" +
-                    "<td><button class='btn btn-info btn-sm' title='Edit'><span class='fa fa-edit' onclick='editAlbum(" + library +")'></span></button>&nbsp"+
-                    "<button class='btn btn-danger btn-sm' title='Hapus'><span class='fa fa-trash-alt' onclick='deleteAlbum(" + library.id + ")'></span></button></td>" +
-                    "</tr>";
-            });
-            html += "</tbody></table>";
-            $("#albumModalBody").html(html);
-        }
-    });
+    const remote = require('electron').remote;
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
-function editAlbum(obj){
-    //$('#id_album').val(obj.id);
-    //$('#nama_album').val(obj.nama);
-    //$('#form_album').show();
-    $("#albumModalBody").html("");
-}
-function deleteAlbum(id) {
+
+function deleteAlbum() {
     var dialog = require('electron').remote.dialog;
+    
+    d = document .getElementsByClassName("active");
+    id= $(d).attr("kode")
+
     var pilih = dialog.showMessageBox(
         remote.getCurrentWindow(),
         {
@@ -96,7 +83,6 @@ function deleteAlbum(id) {
             if (error) console.log(error.code);
             else {
                 load_m_library();
-                loadTableAlbum();
             }
         });
     }
@@ -108,14 +94,13 @@ function load_m_library() {
         else {
             var html = '';
             results.forEach(function (library) {
-                html += "<a class='list-group-item list-group-item-action lgi-library' kode=" + library.kode + ">" + library.nama + "</a>";
+                html += "<a class='list-group-item list-group-item-action lgi-library' kode=" + library.id + ">" + library.nama + "</a>";
             });
             $('#list-library').html(html);
             $(".lgi-library").click(function () {
-                var kode = $(this).attr("kode");
-                const fs = require("fs");
-                var content = fs.readFileSync('src/html/musik.html');
-                $("#content").html(content.toString());
+                $(this).siblings().removeClass("active");
+                $(this).addClass("active");
+                $("#content").load('musik.html');
                 $(".music-control").attr("disabled", false);
             });
         }

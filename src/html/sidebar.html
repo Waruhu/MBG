@@ -1,18 +1,21 @@
 <div class="card" id="library">
-    <h5 class="card-title">Album
-        <button class="btn btn-danger btn-sm float-right" style="margin-right:5px;" id="add-album" title="Tambah Album"
-            data-toggle="modal" data-target="#albumModal">
-            <span class="fa fa-list-ul"></span> </button>
-    </h5>
+    <h5 class="card-title">Album</h5>
     <ul class="list-group" id="list-library"></ul>
+    <div class="footer-btn">
+        <button id="btn-add-library" class="btn btn-success btn-sm float-left footer-card-btn" title="Tambah"><span class="fa fa-plus-circle"></span></button>
+        <button class="btn btn-warning btn-sm float-left footer-card-btn" title="Ubah"><span class="fa fa-pen"></span></button>
+        <button onclick="deleteAlbum()" class="btn btn-danger btn-sm float-left footer-card-btn" title="Hapus"><span class="fa fa-minus-circle"></span></button>
+    </div>
 </div>
 <br />
 <div class="card" id="playlist">
-    <h5 class="card-title">Playlist
-        <button class="btn btn-danger btn-sm float-right" style="margin-right:5px;" id="add-playlist" title="Tambah Playlist">
-            <span class="fa fa-list-ul"></span>
-    </h5>
+    <h5 class="card-title">Playlist</h5>
     <ul class="list-group" id="list-playlist"></ul>
+    <div class="footer-btn">
+        <button id="btn-add-playlist" class="btn btn-success btn-sm float-left footer-card-btn" title="Tambah"><span class="fa fa-plus-circle"></span></button>
+        <button class="btn btn-warning btn-sm float-left footer-card-btn" title="Ubah"><span class="fa fa-pen"></span></button>
+        <button class="btn btn-danger btn-sm float-left footer-card-btn" title="Hapus"><span class="fa fa-minus-circle"></span></button>
+    </div>
 </div>
 <br />
 <div class="card" id="kitab-suci">
@@ -20,31 +23,8 @@
     <ul class="list-group" id="list-kitab-suci">
         <li class="list-group-item list-group-item-action" id="bibel">Bibel</li>
         <li class="list-group-item list-group-item-action" id="alkitab">Alkitab</li>
-    </ul>
+    </ul>    
 </div>
 
-<div class="modal fade" id="albumModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Daftar Album</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body" id="albumModalBody">
-                
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <script src="../js/sidebar.js"></script>
