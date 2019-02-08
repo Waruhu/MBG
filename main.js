@@ -1,8 +1,8 @@
 const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
-    
 //init win
 let win;
 
@@ -14,7 +14,7 @@ function createWindow(){
 		pathname: path.join(__dirname, 'src/html/index.html'),
 		protocol: 'file',
 		slashes: true
-	})); 
+	}));
 
 	//win.maximize();
 	win.setFullScreen(true);
@@ -24,7 +24,7 @@ function createWindow(){
 	win.on('closed',()=>{
 		win = null;
 	});
-	
+
 }
 
 // run create window funtion

@@ -1,0 +1,30 @@
+<link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<br />
+
+
+  </script>
+
+  </script>
+
+</script>
+<div class="container" >
+  <form name='inputform' method='post' action='' enctype="multipart/form-data">
+    <input type="text" id="judul" class="form-control" placeholder="Label library..." aria-label="Label library..."
+        aria-describedby="basic-addon2" name="nametag" size="20" /><br>
+    <input type='file' id="lagu" class="form-control" name='lagu'  ><br>
+    <input type='file' id="lirik" class="form-control" name='lirik' ><br>
+    <input type='button' class='btn btn-info' value='Upload' id='upload' onclick="simpanMusic()">
+  </form>
+</div>
+
+
+<script>
+const remote = require('electron').remote;
+const database = remote.require("./src/js/database.js");
+
+</script>
+
+
+<script src="../../renderer.js"></script>
+<script src="../js/database.js"></script>
+<script src="../js/mbg.js"></script>

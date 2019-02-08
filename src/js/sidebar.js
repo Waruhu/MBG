@@ -21,10 +21,10 @@ $("#btn-add-library").click(function(){
     let top = remote.getCurrentWindow();
     let child = new BrowserWindow({
         with:300,
-        height:100,
-        parent: top, 
-        modal: true, 
-        show: false,
+        height:300,
+        parent: top,
+        modal: true,
+        show: true,
         title: "Formulir"
     });
     child.loadURL(url.format({
@@ -35,14 +35,12 @@ $("#btn-add-library").click(function(){
     child.once('ready-to-show', () => {
         child.show()
     });
-    child.webContents.openDevTools();
 
     child.on('closed',()=>{
         load_m_library();
-        loadTableAlbum();
         child = null;
 	});
-	
+
 
 });
 
@@ -54,18 +52,16 @@ function simpanLibrary(){
         if (error) console.log(error);
         else {
             load_m_library();
-            loadTableAlbum();
+            var window = remote.getCurrentWindow();
+            window.close();
         }
     });
-    const remote = require('electron').remote;
-    var window = remote.getCurrentWindow();
-    window.close();
 }
 
 
 function deleteAlbum() {
     var dialog = require('electron').remote.dialog;
-    
+
     d = document .getElementsByClassName("active");
     id= $(d).attr("kode")
 
@@ -87,6 +83,7 @@ function deleteAlbum() {
         });
     }
 }
+
 function load_m_library() {
     var sql = 'select * from `m_library`';
     database.query(sql, function (error, results, fields) {

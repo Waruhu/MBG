@@ -3,8 +3,8 @@ var mysql = require('mysql');
 // Add the credentials to access your database
 var connection = mysql.createConnection({
     host     : 'localhost',
-    user     : 'perdana',
-    password : 'perdana', // or the original password : 'apaswword'
+    user     : 'root',
+    password : '', // or the original password : 'apaswword'
     database : 'db_mbg'
 });
 
@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
 
           // File path.
             readXlsxFile('./dokumen/List_Bibel.xlsx',{ sheet: 8 }).then((rows) => {
-            
+
           //readXlsxFile('./dokumen/List_Nama_Kitab.xlsx',{ sheet: 1 }).then((rows) => {
             // `rows` is an array of rows
             // each row being an array of cells.
@@ -34,14 +34,14 @@ var connection = mysql.createConnection({
                     console.log(num++)
                   }
                 });
-                
+
             }).done(connection.end(function(){
               console.log("Koneksi Database Diputus")
               // The connection has been closed
             }));
           })
-          
-          
+
+
         }
 
     });

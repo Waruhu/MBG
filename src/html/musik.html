@@ -8,7 +8,6 @@
     var list_lagu = document.getElementById('list-lagu');
 
     var app = require('electron').remote.app;
-   
 
     $('#plus-font-size').bind('click', function () {
         var size = parseInt($("#lirik-lagu").css('font-size'));
@@ -21,33 +20,42 @@
         $('#lirik-lagu').css("font-size", size + "px");
     });
 
+    $('#addLagu').bind('click', function () {
+      const {dialog} = require('electron').remote;
+        dialog.showOpenDialog({
+          properties: ['openFile'],
+          filters: [{
+            name: 'MUSIK BOX',
+            extensions: ['mp4', 'mp3'],
+          }]
+        },function(file){
+            addMusikToDatabase(file);
+        });
+    });
+
+    $('#addLirik').bind('click', function () {
+      const {dialog} = require('electron').remote;
+        dialog.showOpenDialog({
+          properties: ['openFile'],
+          filters: [{
+            name: 'Lirik Lagu',
+            extensions: ['vtt', 'srt'],
+          }]
+        },function(file){
+            addLirikLaguToDatabase(file);
+        });
+    });
+
+
     var player = document.getElementById('audiofile');
     player.volume = 0.5;
+    load_musik();
 
-    function load_musik() {
-        var sql = 'select * from `m_lagu`';
-        database.query(sql, function (error, results, fields) {
-            if (error) console.log(error.code);
-            else {
-                var html = '';
-                var app = require('electron').remote.app;
-                results.forEach(function (lagu) {
-                    html += "<li path_lagu='" + app.getAppPath() + lagu.path_lagu + "' path_lirik='" + app.getAppPath() + lagu.path_lirik + "' class='list-group-item list-group-item-action row-music'>" + lagu.judul + "</li>";
-                });
-                $('#list-lagu').html(html);
-                $(".row-music").click(function () {                    
-                    $(this).siblings().removeClass("active");
-                    $(this).addClass("active");
-                    stop();
-                    $("#audiofile").attr("src",$(this).attr('path_lagu'))
-                    audiosync("audiofile","lirik-lagu",$(this).attr('path_lirik'))
-                    
-                });
-            }
-        });
-    }
 </script>
 <ul class="list-group" id="list-lagu"></ul>
+<button type="file" class="btn btn-default btn-sm" id="btn-add-music" style="margin-bottom:5px; font-size:15pt;"
+    title="Tambah Lagu"><span class="fa fa-plus"></span>Tambah Lagu</button>
+
 <div class="row bg-primary">
     <div class="col-1" id="action-list-ayat">
         <button type="button" class="btn btn-default btn-sm" id="plus-font-size" style="margin-bottom:5px;margin-top:5px; font-size:15pt;"
