@@ -82,6 +82,9 @@ function deleteAlbum() {
             }
         });
     }
+    else{
+      load_m_library();
+    }
 }
 
 function load_m_library() {

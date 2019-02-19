@@ -12,7 +12,7 @@ function load_musik() {
             var html = '';
             var app = require('electron').remote.app;
             results.forEach(function (lagu) {
-                html += "<li path_lagu='" + app.getAppPath() + lagu.path_lagu + "' path_lirik='" + app.getAppPath() + lagu.path_lirik + "' class='list-group-item list-group-item-action row-music'>" + lagu.judul + "</li>";
+                html += "<li path_lagu='" + app.getAppPath() + lagu.path_lagu + "' path_lirik='" + app.getAppPath() + lagu.path_lirik + "' lagu_id = '"+lagu.id +"' class='list-group-item list-group-item-action row-music' >" + lagu.judul + "</li>";
             });
             $('#list-lagu').html(html);
             $(".row-music").click(function () {
@@ -215,7 +215,67 @@ function createSubtitle(text)
             });
           }
         });
+    }
 
 
+    /**
+    * fungsi untuk menghapus lagu
+    * referenced function _deleteFromPath()
+    */
+    function deleteLagu(){
+      var dialog = require('electron').remote.dialog;
 
+      m = document.getElementById("list-lagu").getElementsByClassName("active");
+      id= $(m).attr("lagu_id")
+      _lagu = $(m).attr("path_lagu")
+      _lirik = $(m).attr("path_lirik")
+      var choose = dialog.showMessageBox(
+        remote.getCurrentWindow(),
+        {
+          type : 'question',
+          buttons : ['Ya', 'Tidak'],
+          message : 'Apakah yakin ingin menghapus lagu?'
+        });
+
+        if(choose == 0){
+          var sql = 'delete from m_lagu where id = '+id;
+          database.query(sql,function(error, results, fields){
+            if (error) console.log(error.code);
+            else{
+              _deleteFromPath(_lagu,_lirik);
+              load_musik();
+            }
+          });
+        }
+    }
+
+
+    /**
+    * fungsi untuk menghapus lagu dan lirik dari direktori
+    *
+    * param
+    * p_lagu = path dari lagu
+    * p_lirik = path dari lirik
+    */
+    function _deleteFromPath(p_lagu,p_lirik){
+      if (fs.existsSync(p_lagu)) {
+            fs.unlink(p_lagu, (err) => {
+                if (err) {
+                    alert("An error ocurred updating the file" + err.message);
+                    console.log(err);
+                    return;
+                }
+                console.log("Music succesfully deleted");
+            });
+            fs.unlink(p_lirik, (err) => {
+                if (err) {
+                    alert("An error ocurred updating the file" + err.message);
+                    console.log(err);
+                    return;
+                }
+                console.log("Lyric succesfully deleted");
+            });
+        } else {
+            alert("This file doesn't exist, cannot delete");
+        }
     }
