@@ -31,49 +31,40 @@ function audiosync(idAudioPlayer,idSubtitles, subtitlesFile) {
     var audioPlayer = document.getElementById(idAudioPlayer);
     var subtitles = document.getElementById(idSubtitles);
     var app = require('electron').remote.app;
-    var out = fs.readFileSync(subtitlesFile);
-    createSubtitle(out.toString());
-    // var lirikJS = require('lyrics.js');
-    // var lrc = new lirikJS(app.getAppPath()+'/files/001. HALELUYA 3X HKBP.lrc');
-    // audioPlayer.addEventListener('timeupdate', function(){
-    // 	//Unhighlight all the lyrics
-    // 	var lyric_selected = subtitles.querySelectorAll('[selected]');
-    // 	for (var i = 0; i < lyric_selected.length; i++) {
-    // 		lyric_selected[i].removeAttribute('selected');
-    // 	}
-    //
-    // 	//Get the lyric to highlight
-    // 	var lyric_selected = lrc.toString();
-    //   alert(lyric_selected);
-    //
-    // 	//Highlight the lyric
-    // 	if (lyric_selected != undefined && lyric_selected >= 0) {
-    // 		lyric_selected.setAttribute('selected', 'selected');
-    // 	}
-    // });
-    //
-    // var audioSync = require('audio-sync-with-text');
-    //
-    // new audioSync({
-    //     audioPlayer: idAudioPlayer, // the id of the audio tag
-    //     subtitlesContainer: idSubtitles, // the id where subtitles should show
-    //     subtitlesFile: subtitlesFile // the path to the vtt file
-    // });
+    // var out = fs.readFileSync(subtitlesFile);
+    // createSubtitle(out.toString());
+    var Lyrics = require('lyrics.js');
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",subtitlesFile, false);
+    xhr.send();
+    var lyrics;
+    var lrc = new Lyrics(xhr.responseText);
+    lyrics = lrc.getLyrics();
 
     var tu = function(e){
         subtitles.innerHTML = "";
-        syncData.forEach(function(element, index, array){
+
+        lyrics.forEach(function(element, index, array){
             el = document.createElement('span');
             el.setAttribute("id", "c_" + index);
-            el.innerText = syncData[index].part + "\n";
-            subtitles.appendChild(el);
-            if( (audioPlayer.currentTime*1000) >= element.start && (audioPlayer.currentTime*1000) <= element.end ) {
-                el.style.background = 'yellow';
-                el.scrollIntoView(false);
-
+            if(index % 2 == 0){
+                el.innerText = element.text.slice(0, -10) + " ";
+            }else{
+                el.innerText = element.text.slice(0, -10) + "\n";
             }
-            if(element.end < audioPlayer.currentTime*1000){
+            subtitles.appendChild(el);
+
+            if(index == (lyrics.length -1)){
                 el.style.color = 'yellow';
+            }else{
+                if( (audioPlayer.currentTime) >= element.timestamp && (audioPlayer.currentTime) <= lyrics[index+1].timestamp ) {
+                    el.style.background = 'yellow';
+                    el.scrollIntoView(true);
+                }
+
+                if(lyrics[index+1].timestamp  < audioPlayer.currentTime){
+                    el.style.color = 'yellow';
+                }
             }
 
 
