@@ -153,7 +153,7 @@ function createSubtitle(text)
 
         let top = remote.getCurrentWindow();
 
-        let child = new BrowserWindow({
+        let child  = new BrowserWindow({
             with:400,
             height:500,
             parent: top,
@@ -179,7 +179,6 @@ function createSubtitle(text)
 
     function simpanMusic(){
         event.preventDefault();
-        // var remote = require('electron').remote;
         var app = require('electron').remote.app;
         var fs = require('fs');
         var judul = $("#judul").val();
@@ -199,9 +198,12 @@ function createSubtitle(text)
               if (err) throw err
               else{
                   insertLirikToDatabase(judul, newPathLagu, newPathLirik);
-                  load_musik();
-                  var window = app.getCurrentWindow();
-                  window.close();
+                  var remote = require('electron').remote;
+                  var window = remote.getCurrentWindow();
+                  setTimeout(function () {
+                      window.close();
+                      event.preventDefault()
+                  },100);
               }
             });
           }
