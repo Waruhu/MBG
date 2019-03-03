@@ -1,4 +1,7 @@
-const {app, BrowserWindow} = require('electron');
+const electron = require('electron');
+const app =  electron.app;
+const BrowserWindow = electron.BrowserWindow;
+// const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';

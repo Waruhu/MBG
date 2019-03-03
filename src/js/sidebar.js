@@ -27,11 +27,13 @@ $("#btn-add-library").click(function(){
         show: true,
         title: "Formulir"
     });
+
     child.loadURL(url.format({
 		pathname: path.join(__dirname,'editor-library.html'),
 		protocol: 'file',
 		slashes: true
 	}));
+
     child.once('ready-to-show', () => {
         child.show()
     });
@@ -40,8 +42,6 @@ $("#btn-add-library").click(function(){
         load_m_library();
         child = null;
 	});
-
-
 });
 
 function simpanLibrary(){
