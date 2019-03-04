@@ -1,0 +1,36 @@
+<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet">
+<br />
+<script src="../../renderer.js"></script>
+<script src="../js/playlist.js"></script>
+<div class="container" >
+    <div class="col-lg-12">
+        <h3>Tambah Playlist</h3>
+    </div>
+    <div class="col-lg-12">
+        <form name='inputform' method='post' action='' enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Nama Playlist</label>
+                <input type="text" id="judul" class="form-control" placeholder="Label library..." aria-label="Label library..."
+                       aria-describedby="basic-addon2" name="nametag" size="20" />
+            </div>
+            <div class="form-group">
+                <label>Lagu</label><br>
+                <select class="mdb-select md-form colorful-select dropdown-primary form-control" id="songs-select" multiple searchable="Search here..">
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-info form-control" onclick="savePlaylist()">
+            </div>
+
+        </form>
+    </div>
+</div>
+<script>
+    const remote = require('electron').remote;
+    const database = remote.require("./src/js/database.js");
+
+    $(document).ready(function() {
+        load_songs();
+    });
+</script>

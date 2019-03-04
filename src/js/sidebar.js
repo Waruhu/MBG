@@ -100,8 +100,14 @@ function load_m_library() {
             $(".lgi-library").click(function () {
                 $(this).siblings().removeClass("active");
                 $(this).addClass("active");
-                $("#content").load('musik.html');
-                $(".music-control").attr("disabled", false);
+                if($(this).text() === "My Playlist"){
+                    $("#content").load('playlist.html')
+                    $(".music-control").attr("disabled", false);
+                }else{
+                    $("#content").load('musik.html');
+                    $(".music-control").attr("disabled", false);
+                }
+
             });
         }
     });
