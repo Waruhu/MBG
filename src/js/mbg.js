@@ -4,7 +4,7 @@ var syncData = [];
 
 
 
-function load_musik() {
+    function load_musik() {
     var sql = 'select * from `m_lagu`';
     database.query(sql, function (error, results, fields) {
         if (error) console.log(error.code);
@@ -26,7 +26,7 @@ function load_musik() {
     });
 }
 
-function audiosync(idAudioPlayer,idSubtitles, subtitlesFile) {
+    function audiosync(idAudioPlayer,idSubtitles, subtitlesFile) {
 
     var audioPlayer = document.getElementById(idAudioPlayer);
     var subtitles = document.getElementById(idSubtitles);
@@ -74,8 +74,7 @@ function audiosync(idAudioPlayer,idSubtitles, subtitlesFile) {
     audioPlayer.addEventListener("timeupdate", tu,true);
 }
 
-function createSubtitle(text)
-    {
+    function createSubtitle(text) {
         var rawSubTitle = text;
         convertVttToJson(text)
         .then((result) => {
