@@ -20,7 +20,7 @@ function createWindow(){
 	}));
 
 	//win.maximize();
-	win.setFullScreen(true);
+	// win.setFullScreen(true);
 	//open devtools
 	win.webContents.openDevTools();
 
