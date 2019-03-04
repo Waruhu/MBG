@@ -154,12 +154,11 @@ function createSubtitle(text)
       database.query('INSERT INTO m_lagu SET ?', values, function (err, result) {
         if (err) throw err;
         console.log("1 record inserted");
-
       });
     }
 
     $("#btn-add-music").click(function(){
-        const remote = require(electron).remote;
+        const remote = require('electron').remote;
         const BrowserWindow = remote.BrowserWindow;
         const path = require('path');
         const url = require('url');
@@ -240,7 +239,6 @@ function createSubtitle(text)
 
     function simpanMusic(){
         event.preventDefault();
-        // var remote = require('electron').remote;
         var app = require('electron').remote.app;
         var fs = require('fs');
         var judul = $("#judul").val();
@@ -252,17 +250,20 @@ function createSubtitle(text)
         var newPathLagu =  '/files/'+fileNameLagu;
         var newPathLirik = '/files/'+fileNameLirik;
 
-        fs.rename(lagu, app.getAppPath()+newPathLagu, function (err) {
+        fs.copyFile(lagu, app.getAppPath()+newPathLagu, function (err) {
           if (err) throw err
           else{
-            fs.rename(lirik, app.getAppPath()+newPathLirik, function (err) {
+            fs.copyFile(lirik, app.getAppPath()+newPathLirik, function (err) {
             console.log('Successfully add lagu!')
               if (err) throw err
               else{
                   insertLirikToDatabase(judul, newPathLagu, newPathLirik);
-                  load_musik();
-                  var window = app.getCurrentWindow();
-                  window.close();
+                  var remote = require('electron').remote;
+                  var window = remote.getCurrentWindow();
+                  setTimeout(function () {
+                      window.close();
+                      event.preventDefault()
+                  },100);
               }
             });
           }
@@ -275,39 +276,90 @@ function createSubtitle(text)
       */
     function updateMusic(){
       event.preventDefault();
-      // var remote = require('electron').remote;
       var app = require('electron').remote.app;
       var fs = require('fs');
       var judul = $("#judul").val();
       var inputLagu = document.getElementById('lagu');
       var ew = document.getElementById('lirik');
 
-      // var lagu=document.getElementById('lagu').files[0].path;
-      var fileNameLagu = lagu.replace(/^.*[\\\/]/, '');
-      // var lirik = document.getElementById('lirik').files[0].path;
+      id = sessionStorage.getItem("idLagu");
 
-      var fileNameLirik = lirik.replace(/^.*[\\\/]/, '');
-
-      var newPathLagu =  '/files/'+fileNameLagu;
-      var newPathLirik = '/files/'+fileNameLirik;
-
-      fs.rename(lagu, app.getAppPath()+newPathLagu, function (err) {
-        if (err) throw err
-        else{
-          fs.rename(lirik, app.getAppPath()+newPathLirik, function (err) {
-          console.log('Successfully add lagu!')
-            if (err) throw err
+      if(judul!=null){
+          var sqlJudul ='UPDATE m_lagu SET judul = "'+judul+'" WHERE m_lagu.id ='+id;
+          database.query(sqlJudul,function(error,result,fields){
+            if(error) console.log(error);
             else{
-                insertLirikToDatabase(judul, newPathLagu, newPathLirik);
-                load_musik();
-                var window = app.getCurrentWindow();
-                window.close();
-            }
-          });
-        }
-      });
+              console.log("Judul Berhasil diupdate");
+              if(inputLagu.files.length!=0){
+                  var lagu=inputLagu.files[0].path;
+                  var fileNameLagu = lagu.replace(/^.*[\\\/]/, '');
+                  var newPathLagu =  '/files/'+fileNameLagu;
+                  var sqlLagu = 'UPDATE m_lagu SET path_lagu = "'+newPathLagu+'" WHERE id = '+id;
+                  database.query(sqlLagu,function(error,result,fields){
+                    if(error) console.log(error);
+                    else{
+                      oldLagu = sessionStorage.getItem("oldPathLagu");
+                      if(fs.existsSync(oldLagu)){
+                        fs.unlink(oldLagu,(err) => {
+                          if(err){
+                            console.log(err);
+                            return
+                          }
+                          else{
+                            fs.copyFile(lagu,app.getAppPath()+newPathLagu,function (err){
+                              if(err) throw err
+                              else{
+                                console.log("Berhasil Update Lagu");
+                              }
+                            })
+                          }
+                        });
+                      }
+                    }
+                  });
+                }
 
-    }
+                if(ew.files.length!=0){
+                    var lirik = ew.files[0].path;
+                    var fileNameLirik = lirik.replace(/^.*[\\\/]/, '');
+                    var newPathLirik = '/files/'+fileNameLirik;
+                    var sqlLirik = 'UPDATE m_lagu SET path_lirik = "'+newPathLirik+'" WHERE id = '+id;
+                    database.query(sqlLirik,function(error,result,fields){
+                      if(error) console.log(error);
+                      else{
+                        oldLirik = sessionStorage.getItem("oldPathLirik");
+                        if(fs.existsSync(oldLirik)){
+                          fs.unlink(oldLirik,(err) => {
+                            if(err){
+                              console.log(err);
+                              return
+                            }
+                            else{
+                              fs.copyFile(lirik,app.getAppPath()+newPathLirik,function (err){
+                                if(err) throw err
+                                else{
+                                  console.log("Berhasil Update Lirik");
+                                }
+                              })
+                            }
+                          });
+                        }
+                      }
+                    });
+                }
+
+                var remote = require('electron').remote;
+                var window = remote.getCurrentWindow();
+                setTimeout(function () {
+                    window.close();
+                    event.preventDefault()
+                },800);
+            }
+          })
+        }
+      }
+
+
     /**
     * fungsi untuk menghapus lagu
     * referenced function _deleteFromPath()
