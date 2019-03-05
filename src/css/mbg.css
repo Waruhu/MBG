@@ -1,44 +1,53 @@
-#list-library, #list-playlist, #list-kitab-suci, #list-ayat{
-	overflow-y: scroll;
+#list-library, #list-playlist, #list-kitab-suci, #list-ayat {
+    overflow-y: scroll;
 }
-#library,#list-library{
-	height:400px !important;
+
+#library, #list-library {
+    height: 400px !important;
 }
-#playlist,#list-playlist{
-	height:250px !important;
+
+#playlist, #list-playlist {
+    height: 250px !important;
 }
-#kitab-suci,#list-kitab-suci{
-	max-height: 200px !important;
-	bottom: 0;
+
+#kitab-suci, #list-kitab-suci {
+    max-height: 200px !important;
+    bottom: 0;
 }
-#container{
-    height:960px !important;
+
+#container {
+    height: 960px !important;
     background-color: burlywood;
 }
-#list-ayat{
+
+#list-ayat {
     height: 715px !important;
     font-size: 30pt;
-    color:white;
+    color: white;
 }
-#lirik-lagu{
+
+#lirik-lagu {
     height: 660px !important;
     font-size: 48pt;
     overflow-y: scroll;
 }
-#list-lagu{
+
+#list-lagu {
     overflow-y: scroll;
     height: 200px;
 }
-audio{
+
+audio {
     width: 100% !important;
 
 }
+
 .footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgba(5, 162, 199, 0.96)!important;
+    background-color: rgba(5, 162, 199, 0.96) !important;
     color: white;
     height: 50px;
     padding: 10px 5px 10px 5px;
@@ -50,19 +59,21 @@ audio{
     padding: .1rem 0.2rem;
     margin-bottom: -1px;
     background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
 }
 
 
-.list-group-item:hover{
+.list-group-item:hover {
     background-color: gold;
     color: red;
 }
-.list-group-item.active{
+
+.list-group-item.active {
     background-color: gold !important;
 }
-.list-group-item:visited{
-    background-color:limegreen;
+
+.list-group-item:visited {
+    background-color: limegreen;
 }
 
 .card-title {
@@ -71,15 +82,17 @@ audio{
     background-color: #078aea;
     padding-top: 0.5em;
     text-align: center;
-    color:white;
+    color: white;
     font-weight: bold;
 }
-.footer-card-btn{
+
+.footer-card-btn {
     width: 30px;
-    margin-bottom:5px;
-    margin-left:10px;
-    margin-top:10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
+
 .slidecontainer {
     width: 100%; /* Width of the outside container */
 }
@@ -89,7 +102,7 @@ audio{
     -webkit-appearance: none;
     width: 100%;
     height: 10px;
-    border-radius: 5px;  
+    border-radius: 5px;
     background-color: white;
     outline: none;
 }
@@ -99,8 +112,8 @@ audio{
     appearance: none;
     width: 20px;
     height: 20px;
-    border-radius: 50%; 
-    background:blue;
+    border-radius: 50%;
+    background: blue;
     cursor: pointer;
 }
 
@@ -108,33 +121,39 @@ audio{
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background:blue;
+    background: blue;
     cursor: pointer;
 }
 
-    progress {
-        width: 50%;
-        float: left;
-        margin-top:10px;
-      }
-      
-      progress[value] {
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: white;
-        color: blue;
-        height: 10px;
-      }
-      
-      progress[value]::-webkit-progress-bar {
-        background-color: white;
-        border-radius: 2px;
-        border: 1px solid lighten(#acacac, 20%);
-        color: blue;
-      }
-      
-      progress::-webkit-progress-value {
-        background-color: blue;
-      }
+progress {
+    width: 50%;
+    float: left;
+    margin-top: 10px;
+}
 
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: white;
+    color: blue;
+    height: 10px;
+}
 
+progress[value]::-webkit-progress-bar {
+    background-color: white;
+    border-radius: 2px;
+    border: 1px solid lighten(#acacac, 20%);
+    color: blue;
+}
+
+progress::-webkit-progress-value {
+    background-color: blue;
+}
+
+.button-cst{
+    box-shadow:0px 0px 6px 1px rgba(0, 0, 0, 0.47);
+}
+
+.bg-light{
+    background-color: black;
+}
