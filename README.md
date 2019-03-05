@@ -14,7 +14,7 @@ Install some package below :
 Clone Project by this command below
 
 ```
-git clone https://gitlab.com/d074/mbg.git
+git clone https://github.com/Waruhu/MBG.git
 ```
 
 ### Install Package Dependency
