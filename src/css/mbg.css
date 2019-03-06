@@ -64,12 +64,12 @@ audio {
 
 
 .list-group-item:hover {
-    background-color: gold;
-    color: red;
+    background-color: #fffc91;
+    color: black;
 }
 
 .list-group-item.active {
-    background-color: gold !important;
+    background-color: #fffc91 !important;
 }
 
 .list-group-item:visited {

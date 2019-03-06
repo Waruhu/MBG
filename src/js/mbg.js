@@ -51,9 +51,9 @@ var syncData = [];
             el = document.createElement('span');
             el.setAttribute("id", "c_" + index);
             if(index % 2 == 0){
-                el.innerText = element.text.slice(0, -10) + " ";
+                el.innerHTML = element.text.slice(0, -10) + " ";
             }else{
-                el.innerText = element.text.slice(0, -10) + "\n";
+                el.innerHTML = element.text.slice(0, -10) + "<br>";
             }
             subtitles.appendChild(el);
 
